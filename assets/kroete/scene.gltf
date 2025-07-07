@@ -1,0 +1,260 @@
+{
+  "accessors": [
+    {
+      "bufferView": 0,
+      "componentType": 5123,
+      "count": 96,
+      "type": "SCALAR"
+    },
+    {
+      "bufferView": 1,
+      "componentType": 5126,
+      "count": 25,
+      "max": [
+        1.4912229776382446,
+        6.281625530846213e-08,
+        0.3855634033679962
+      ],
+      "min": [
+        -1.4912229776382446,
+        -6.281625530846213e-08,
+        -0.3855634033679962
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 2,
+      "componentType": 5126,
+      "count": 25,
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 3,
+      "componentType": 5125,
+      "count": 782562,
+      "type": "SCALAR"
+    },
+    {
+      "bufferView": 4,
+      "componentType": 5126,
+      "count": 154186,
+      "max": [
+        14.070794105529785,
+        16.773082733154297,
+        27.2818660736084
+      ],
+      "min": [
+        -14.032519340515137,
+        -15.696650505065918,
+        -30.941692352294922
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 5,
+      "componentType": 5126,
+      "count": 154186,
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 6,
+      "componentType": 5126,
+      "count": 154186,
+      "max": [
+        0.9978025555610657,
+        0.6252127289772034
+      ],
+      "min": [
+        0.002084679901599884,
+        0.0021014809608459473
+      ],
+      "type": "VEC2"
+    }
+  ],
+  "asset": {
+    "generator": "HS glTF exporter for 3dsmax 1.53 (custom3dsmax@gmail.com)",
+    "version": "2.0"
+  },
+  "bufferViews": [
+    {
+      "buffer": 0,
+      "byteLength": 192,
+      "target": 34963
+    },
+    {
+      "buffer": 0,
+      "byteLength": 300,
+      "byteOffset": 192,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 300,
+      "byteOffset": 492,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 3130248,
+      "byteOffset": 792,
+      "target": 34963
+    },
+    {
+      "buffer": 0,
+      "byteLength": 1850232,
+      "byteOffset": 3131040,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 1850232,
+      "byteOffset": 4981272,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 1233488,
+      "byteOffset": 6831504,
+      "target": 34962
+    }
+  ],
+  "buffers": [
+    {
+      "byteLength": 8064992,
+      "uri": "ene.bin"
+    }
+  ],
+  "images": [
+    {
+      "uri": "texgen_0.jpeg"
+    }
+  ],
+  "materials": [
+    {
+      "name": "Material #5",
+      "pbrMetallicRoughness": {
+        "baseColorTexture": {
+          "index": 0
+        },
+        "metallicFactor": 0.0,
+        "roughnessFactor": 0.577
+      }
+    },
+    {
+      "emissiveFactor": [
+        1.0,
+        0.3529411852359772,
+        0.0
+      ],
+      "name": "Material #6",
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ],
+        "metallicFactor": 0.0,
+        "roughnessFactor": 0.5
+      }
+    }
+  ],
+  "meshes": [
+    {
+      "name": "Plane001",
+      "primitives": [
+        {
+          "attributes": {
+            "NORMAL": 2,
+            "POSITION": 1
+          },
+          "indices": 0,
+          "material": 1,
+          "mode": 4
+        }
+      ]
+    },
+    {
+      "name": "scene",
+      "primitives": [
+        {
+          "attributes": {
+            "NORMAL": 5,
+            "POSITION": 4,
+            "TEXCOORD_0": 6
+          },
+          "indices": 3,
+          "material": 0,
+          "mode": 4
+        }
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "matrix": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        -1.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        2.1213538646698,
+        14.364471435546875,
+        4.9663238525390625,
+        1.0
+      ],
+      "mesh": 0,
+      "name": "Plane001"
+    },
+    {
+      "matrix": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        -1.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        -0.372761607170105,
+        2.5027923583984375,
+        -6.607595443725586,
+        1.0
+      ],
+      "mesh": 1,
+      "name": "scene"
+    }
+  ],
+  "samplers": [
+    {
+      "wrapS": 10497,
+      "wrapT": 10497
+    }
+  ],
+  "scene": 0,
+  "scenes": [
+    {
+      "nodes": [
+        0,
+        1
+      ]
+    }
+  ],
+  "textures": [
+    {
+      "sampler": 0,
+      "source": 0
+    }
+  ]
+}
