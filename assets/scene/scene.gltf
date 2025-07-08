@@ -1,0 +1,203 @@
+{
+  "accessors": [
+    {
+      "bufferView": 0,
+      "componentType": 5123,
+      "count": 24756,
+      "type": "SCALAR"
+    },
+    {
+      "bufferView": 1,
+      "componentType": 5126,
+      "count": 4215,
+      "max": [
+        218.2310333251953,
+        218.23231506347656,
+        1.331183910369873
+      ],
+      "min": [
+        -218.23265075683594,
+        -218.23501586914063,
+        -1.2916109561920166
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 2,
+      "componentType": 5126,
+      "count": 4215,
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 3,
+      "componentType": 5123,
+      "count": 36,
+      "type": "SCALAR"
+    },
+    {
+      "bufferView": 4,
+      "componentType": 5126,
+      "count": 24,
+      "max": [
+        19.685039520263672,
+        19.685039520263672,
+        39.370079040527344
+      ],
+      "min": [
+        -19.685039520263672,
+        -19.685039520263672,
+        0.0
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 5,
+      "componentType": 5126,
+      "count": 24,
+      "type": "VEC3"
+    }
+  ],
+  "asset": {
+    "generator": "HS glTF exporter for 3dsmax 1.53 (custom3dsmax@gmail.com)",
+    "version": "2.0"
+  },
+  "bufferViews": [
+    {
+      "buffer": 0,
+      "byteLength": 49512,
+      "target": 34963
+    },
+    {
+      "buffer": 0,
+      "byteLength": 50580,
+      "byteOffset": 49512,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 50580,
+      "byteOffset": 100092,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 72,
+      "byteOffset": 150672,
+      "target": 34963
+    },
+    {
+      "buffer": 0,
+      "byteLength": 288,
+      "byteOffset": 150744,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 288,
+      "byteOffset": 151032,
+      "target": 34962
+    }
+  ],
+  "buffers": [
+    {
+      "byteLength": 151320,
+      "uri": "scene.bin"
+    }
+  ],
+  "materials": [
+    {
+      "name": "Material #2",
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          0.16078431904315948,
+          0.16078431904315948,
+          0.16078431904315948,
+          1.0
+        ],
+        "metallicFactor": 0.0,
+        "roughnessFactor": 0.5
+      }
+    }
+  ],
+  "meshes": [
+    {
+      "name": "Circle017",
+      "primitives": [
+        {
+          "attributes": {
+            "NORMAL": 2,
+            "POSITION": 1
+          },
+          "indices": 0,
+          "material": 0,
+          "mode": 4
+        }
+      ]
+    },
+    {
+      "name": "Box001",
+      "primitives": [
+        {
+          "attributes": {
+            "NORMAL": 5,
+            "POSITION": 4
+          },
+          "indices": 3,
+          "material": 0,
+          "mode": 4
+        }
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "mesh": 0,
+      "name": "Circle017",
+      "rotation": [
+        0.7071067690849304,
+        -0.0,
+        -0.0,
+        -0.7071067690849304
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "translation": [
+        -0.4830947518348694,
+        0.0,
+        -2.4154584407806396
+      ]
+    },
+    {
+      "mesh": 1,
+      "name": "Box001",
+      "rotation": [
+        0.7071067690849304,
+        -0.0,
+        -0.0,
+        -0.7071067690849304
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "translation": [
+        1.0,
+        1.0,
+        -1.0
+      ]
+    }
+  ],
+  "scene": 0,
+  "scenes": [
+    {
+      "nodes": [
+        0,
+        1
+      ]
+    }
+  ]
+}

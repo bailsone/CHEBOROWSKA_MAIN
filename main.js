@@ -29,49 +29,41 @@ function animate() {
 //Import the THREE.js library
 import * as THREE from 'three';
 // To allow for the camera to move around the scene
-import { OrbitControls } from "/node_modules/three/examples/jsm/controls/OrbitControls.js";
+import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 // To allow for importing the .gltf file
-import { GLTFLoader } from "/node_modules/three/examples/jsm/loaders/GLTFLoader.js";
+import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 
 
-//Create a Three.JS Scene
+//INIT SCENE
 const scene = new THREE.Scene();
-//create a new camera with positions and angles
+//CAMERA
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-THREE.PerspectiveCam
-//Keep track of the mouse position, so we can make the eye move
+//MOUSE
 let mouseX = window.innerWidth / 2;
 let mouseY = window.innerHeight / 2;
-
-//Keep the 3D object on a global variable so we can access it later
-let object;
-
-//OrbitControls allow the camera to move around the scene
-let controls;
-
-//Set which object to render
-let objToRender = 'kroete';
+let object; //Keep the 3D object on a global variable so we can access it later
+let controls; //OrbitControls allow the camera to move around the scene
+let objToRender = 'kroete'; //Set which object to render
 
 //Instantiate a loader for the .gltf file
 const loader = new GLTFLoader();
 
 //Load the file
-loader.load(
-  `./assets/kroete/scene.gltf`,
+loader.load(    //If the file is loaded, add it to the scene
+  `./assets/`+ objToRender +`/scene.gltf`,
   function (gltf) {
-    //If the file is loaded, add it to the scene
     object = gltf.scene;
     scene.add(object);
   },
   function (xhr) {
-    //While it is loading, log the progress
-    console.log((xhr.loaded / xhr.total * 100) + '% loaded');
+    console.log((xhr.loaded / xhr.total * 100) + '% loaded'); //While it is loading, log the progress
   },
   function (error) {
-    //If there is an error, log it
-    console.error(error);
+    console.error(error);  //If there is an error, log it
   }
 );
+
+
 
 //Instantiate a new renderer and set its size
 const renderer = new THREE.WebGLRenderer({ alpha: true }); //Alpha: true allows for the transparent background
@@ -81,48 +73,56 @@ renderer.setSize(window.innerWidth, window.innerHeight);
 document.getElementById("container3D").appendChild(renderer.domElement);
 
 //Set how far the camera will be from the 3D model
-camera.position.z = objToRender === "kroete" ? 25 : 1500;
+camera.position.z = new THREE.Vector3(35, 0, 0).length(); //This sets the camera to be 50 units away from the origin (0,0,0) in the scene 
 
 //Add lights to the scene, so we can actually see the 3D model
-const topLight = new THREE.DirectionalLight(0xffffff, 1); // (color, intensity)
-topLight.position.set(500, 500, -500) //top-left-ish
+
+const topLight = new THREE.DirectionalLight(0xffffff, 5); // (color, intensity)
+topLight.position.set(500, 500, 500) //top-left-ish
 topLight.castShadow = true;
 scene.add(topLight);
 
-THREE.Scene
-const ambientLight = new THREE.AmbientLight(0x333333, objToRender === "kroete" ? 5 : 1);
+const ambientLight = new THREE.AmbientLight(0x2b3b4b, objToRender === objToRender ? 5 : 1);
 scene.add(ambientLight);
-//This adds controls to the camera, so we can rotate / zoom it with the mouse
 
+
+//This adds controls to the camera, so we can rotate / zoom it with the mouse
 if (objToRender === "kroete") {
-  //controls = new OrbitControls(camera, renderer.domElement)
         controls = new OrbitControls(camera, renderer.domElement);
         controls.enableDamping = true;   //damping 
-        controls.dampingFactor = 0.25;   //damping inertia
+        controls.dampingFactor = 0.4;   //damping inertia
         controls.enableZoom = true;      //Zooming
         controls.autoRotate = false;       // enable rotation
         controls.maxPolarAngle = Math.PI / 1.5; // Limit angle of visibility
         controls.maxDistance = 100.0;
-        controls.minDistance = 50.0;
-        controls.keys = {
-          LEFT: 37, //left arrow
-          UP: 38, // up arrow
-          RIGHT: 39, // right arrow
-          BOTTOM: 40 // down arrow
-        };
+        controls.minDistance = 35.0;
+        controls.keyPanSpeed = 7.0;
+        controls.enablePan = true; //Enable panning
+       controls.keys = {
+	LEFT: 'KeyA', //left arrow
+	UP: 'KeyW', // up arrow
+	RIGHT: 'KeyD', // right arrow
+	BOTTOM: 'KeyS' // down arrow
+}
 }
 
 //Render the scene
 function animate() {
   requestAnimationFrame(animate);
   //Here we could add some code to update the scene, adding some automatic movement
-  object.rotation.y += 0.001;
+
   //Make the eye move
   if (object && objToRender === "eye") {
     //I've played with the constants here until it looked good
     object.rotation.y = -3 + mouseX / window.innerWidth * 3;
     object.rotation.x = -1.2 + mouseY * 2.5 / window.innerHeight;
   }
+
+    if (object && objToRender === "kroete") {
+    //I've played with the constants here until it looked good
+  object.rotation.y += 0.001;
+  }
+
   renderer.render(scene, camera);
 }
 
