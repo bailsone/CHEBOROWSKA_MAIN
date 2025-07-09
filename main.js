@@ -32,12 +32,13 @@ import * as THREE from 'three';
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 // To allow for importing the .gltf file
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
+import { Controls } from 'three/src/Three.Core.js';
 
 
 //INIT SCENE
 const scene = new THREE.Scene();
 //CAMERA
-const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+const camera = new THREE.PerspectiveCamera(35, window.innerWidth / window.innerHeight, 0.1, 1000);
 //MOUSE
 let mouseX = window.innerWidth / 2;
 let mouseY = window.innerHeight / 2;
@@ -73,16 +74,32 @@ renderer.setSize(window.innerWidth, window.innerHeight);
 document.getElementById("container3D").appendChild(renderer.domElement);
 
 //Set how far the camera will be from the 3D model
-camera.position.z = new THREE.Vector3(35, 0, 0).length(); //This sets the camera to be 50 units away from the origin (0,0,0) in the scene 
-
+camera.position.set(100, -20, 200) //This sets the camera to be 50 units away from the origin (0,0,0) in the scene 
 //Add lights to the scene, so we can actually see the 3D model
-
-const topLight = new THREE.DirectionalLight(0xffffff, 5); // (color, intensity)
+const topLight = new THREE.DirectionalLight(0xab7a68, 0,2); // (color, intensity)
 topLight.position.set(500, 500, 500) //top-left-ish
 topLight.castShadow = true;
-scene.add(topLight);
+//scene.add(topLight);
 
-const ambientLight = new THREE.AmbientLight(0x2b3b4b, objToRender === objToRender ? 5 : 1);
+const spotLight = new THREE.SpotLight( 0xc47335, 10 );
+				spotLight.position.set( -50, 50, -40 );
+				spotLight.angle = Math.PI / 6;
+				spotLight.penumbra = 1;
+				spotLight.decay = 0;
+				spotLight.distance = 0;
+        spotLight.castShadow = true;
+        spotLight.shadow.mapSize.width = 4096;  // default
+        spotLight.shadow.mapSize.height = 4096; // default
+        spotLight.shadow.camera.near = 10;       // default
+        spotLight.shadow.camera.far = 100;       // default
+        spotLight.shadow.camera.fov = 30;        // default
+        spotLight.shadow.bias = 1; // default
+        spotLight.shadow.radius = 0; // default
+        spotLight.shadow.intensity = 1;
+        spotLight.receiveShadow = true; // Allow the object to receive shadows
+        scene.add(spotLight);
+
+const ambientLight = new THREE.AmbientLight(0x4b3d2b, objToRender === objToRender ? 1.4 : 1); // (color, intensity)
 scene.add(ambientLight);
 
 
@@ -94,7 +111,7 @@ if (objToRender === "kroete") {
         controls.enableZoom = true;      //Zooming
         controls.autoRotate = false;       // enable rotation
         controls.maxPolarAngle = Math.PI / 1.5; // Limit angle of visibility
-        controls.maxDistance = 100.0;
+        controls.maxDistance = 400.0;
         controls.minDistance = 35.0;
         controls.keyPanSpeed = 7.0;
         controls.enablePan = true; //Enable panning
@@ -120,7 +137,8 @@ function animate() {
 
     if (object && objToRender === "kroete") {
     //I've played with the constants here until it looked good
-  object.rotation.y += 0.001;
+    
+ // object.rotation.y += 0.001;
   }
 
   renderer.render(scene, camera);
