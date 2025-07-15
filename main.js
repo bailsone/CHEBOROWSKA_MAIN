@@ -31,7 +31,7 @@ import * as THREE from 'three';
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 // To allow for importing the .gltf file
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
-import { Controls } from 'three/src/Three.Core.js';
+import { controls } from 'three/src/Three.Core.js';
 
 THREE.Clock
 //INIT SCENE
@@ -115,7 +115,7 @@ if (objToRender === "kroete") {
         controls.keyPanSpeed = 7.0;
         controls.enablePan = true; //Enable panning
        controls.keys = {
-	LEFT: 'KeyA', //left arrow
+  LEFT: 'KeyA', //left arrow
 	UP: 'KeyW', // up arrow
 	RIGHT: 'KeyD', // right arrow
 	BOTTOM: 'KeyS' // down arrow
