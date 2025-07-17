@@ -1,41 +1,21 @@
-/*  ^°°°°°°°°°°°°
-TEST
-import * as THREE from 'three';
-
-const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
-const renderer = new THREE.WebGLRenderer();
-renderer.setSize( window.innerWidth, window.innerHeight );
-renderer.setAnimationLoop( animate );
-document.body.appendChild( renderer.domElement );
-
-const geometry = new THREE.BoxGeometry( 1, 1, 1 );
-const material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
-const cube = new THREE.Mesh( geometry, material );
-scene.add( cube );
-
-camera.position.z = 5;
-
-function animate() {
-
-  cube.rotation.x += 0.01;
-  cube.rotation.y += 0.01;
-
-  renderer.render( scene, camera );
-
-}
-  */
 //Import the THREE.js library
 import * as THREE from 'three';
 // To allow for the camera to move around the scene
+
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 // To allow for importing the .gltf file
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
-import { controls } from 'three/src/Three.Core.js';
+import { Controls } from 'three/src/Three.Core.js';
+import Stats from 'three/examples/jsm/libs/stats.module'
+import { Lensflare, LensflareElement } from 'three/addons/objects/Lensflare.js';
+
 
 THREE.Clock
 //INIT SCENE
 const scene = new THREE.Scene();
+//scene.background = new THREE.Color().setHSL( 0.07, 1.0, 0.04, THREE.SRGBColorSpace );
+//scene.fog = new THREE.Fog( scene.background, 10, 50 );
+//scene.background = null;
 //CAMERA
 const camera = new THREE.PerspectiveCamera(35, window.innerWidth / window.innerHeight, 0.1, 1000);
 //MOUSE
@@ -53,7 +33,9 @@ loader.load(    //If the file is loaded, add it to the scene
   `./assets/`+ objToRender +`/scene.gltf`,
   function (gltf) {
     object = gltf.scene;
+
     scene.add(object);
+
   },
   function (xhr) {
     console.log((xhr.loaded / xhr.total * 100) + '% loaded'); //While it is loading, log the progress
@@ -62,18 +44,19 @@ loader.load(    //If the file is loaded, add it to the scene
     console.error(error);  //If there is an error, log it
   }
 );
-
+//Set the position of the object to the origin (0,0,0) in the scene
 
 
 //Instantiate a new renderer and set its size
-const renderer = new THREE.WebGLRenderer({ alpha: true }); //Alpha: true allows for the transparent background
+const renderer = new THREE.WebGLRenderer( { antialias: true, alpha: true } ); //Alpha: true allows for the transparent background
 renderer.setSize(window.innerWidth, window.innerHeight);
 
 //Add the renderer to the DOM
 document.getElementById("container3D").appendChild(renderer.domElement);
 
 //Set how far the camera will be from the 3D model
-camera.position.set(100, -20, 200) //This sets the camera to be 50 units away from the origin (0,0,0) in the scene 
+camera.position.set(0, 0, 50) //This sets the camera to be 50 units away from the origin (0,0,0) in the scene 
+scene.position.set(0, -5, 0); //This sets the scene to be at the origin (0,0,0) in the scene
 //Add lights to the scene, so we can actually see the 3D model
 const topLight = new THREE.DirectionalLight(0xab7a68, 0,2); // (color, intensity)
 topLight.position.set(500, 500, 500) //top-left-ish
@@ -102,6 +85,33 @@ const ambientLight = new THREE.AmbientLight(0x4b3d2b, objToRender === objToRende
 scene.add(ambientLight);
 
 
+				// lensflares
+				const textureLoader = new THREE.TextureLoader();
+
+				const textureFlare0 = textureLoader.load( 'assets/textures/lensflare/lensflare0.png' );
+				const textureFlare3 = textureLoader.load( 'assets/textures/lensflare/lensflare3.png' );
+
+				addLight( 0.55, 0.9, 0.5, 10, 0, 0 );
+				addLight( 0.08, 0.8, 0.5, 20, 0, 0 );
+				addLight( 0.995, 0.5, 0.9, 30, 0, 0 );
+
+				function addLight( h, s, l, x, y, z ) {
+
+					const light = new THREE.PointLight( 0xffffff, 1.5, 2000, 0 );
+					light.color.setHSL( h, s, l );
+					light.position.set( x, y, z );
+					scene.add( light );
+
+					const lensflare = new Lensflare();
+					lensflare.addElement( new LensflareElement( textureFlare0, 700, 0, light.color ) );
+					lensflare.addElement( new LensflareElement( textureFlare3, 60, 0.6 ) );
+					lensflare.addElement( new LensflareElement( textureFlare3, 70, 0.7 ) );
+					lensflare.addElement( new LensflareElement( textureFlare3, 120, 0.9 ) );
+					lensflare.addElement( new LensflareElement( textureFlare3, 70, 1 ) );
+					light.add( lensflare );
+
+				}
+
 //This adds controls to the camera, so we can rotate / zoom it with the mouse
 if (objToRender === "kroete") {
         controls = new OrbitControls(camera, renderer.domElement);
@@ -122,6 +132,9 @@ if (objToRender === "kroete") {
 }
 }
 
+const stats = new Stats();
+document.body.appendChild(stats.dom);
+
 //Render the scene
 function animate() {
   requestAnimationFrame(animate);
@@ -137,10 +150,11 @@ function animate() {
     if (object && objToRender === "kroete") {
     //I've played with the constants here until it looked good
     
- // object.rotation.y += 0.001;
+  object.rotation.y += 0.001;
   }
-
+  stats.update();
   renderer.render(scene, camera);
+
 }
 
 //Add a listener to the window, so we can resize the window and the camera
