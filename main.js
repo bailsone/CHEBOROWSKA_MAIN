@@ -5,12 +5,10 @@ import * as THREE from 'three';
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 // To allow for importing the .gltf file
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
-import { Controls } from 'three/src/Three.Core.js';
-import Stats from 'three/examples/jsm/libs/stats.module'
 import { Lensflare, LensflareElement } from 'three/addons/objects/Lensflare.js';
 
+import Stats from 'three/examples/jsm/libs/stats.module'
 
-THREE.Clock
 //INIT SCENE
 const scene = new THREE.Scene();
 //scene.background = new THREE.Color().setHSL( 0.07, 1.0, 0.04, THREE.SRGBColorSpace );
@@ -88,12 +86,12 @@ scene.add(ambientLight);
 				// lensflares
 				const textureLoader = new THREE.TextureLoader();
 
-				const textureFlare0 = textureLoader.load( 'assets/textures/lensflare/lensflare0.png' );
-				const textureFlare3 = textureLoader.load( 'assets/textures/lensflare/lensflare3.png' );
+				const textureFlare0 = textureLoader.load( 'assets/textures/lensflare/lensflare0_alpha.png' );
+				const textureFlare3 = textureLoader.load( 'assets/textures/lensflare/lensflare3_alpha.png' );
 
-				addLight( 0.55, 0.9, 0.5, 10, 0, 0 );
-				addLight( 0.08, 0.8, 0.5, 20, 0, 0 );
-				addLight( 0.995, 0.5, 0.9, 30, 0, 0 );
+				//addLight( 0.55, 0.9, 0.5, 10, 0, 0 );
+				//addLight( 0.08, 0.8, 0.5, 20, 0, 0 );
+				addLight( 1.0, 0.3, 1.0, 2, 14.49, 5.3);
 
 				function addLight( h, s, l, x, y, z ) {
 
@@ -103,7 +101,7 @@ scene.add(ambientLight);
 					scene.add( light );
 
 					const lensflare = new Lensflare();
-					lensflare.addElement( new LensflareElement( textureFlare0, 700, 0, light.color ) );
+					lensflare.addElement( new LensflareElement( textureFlare0, 200, 0, light.color ) );
 					lensflare.addElement( new LensflareElement( textureFlare3, 60, 0.6 ) );
 					lensflare.addElement( new LensflareElement( textureFlare3, 70, 0.7 ) );
 					lensflare.addElement( new LensflareElement( textureFlare3, 120, 0.9 ) );
@@ -124,11 +122,11 @@ if (objToRender === "kroete") {
         controls.minDistance = 35.0;
         controls.keyPanSpeed = 7.0;
         controls.enablePan = true; //Enable panning
-       controls.keys = {
-  LEFT: 'KeyA', //left arrow
-	UP: 'KeyW', // up arrow
-	RIGHT: 'KeyD', // right arrow
-	BOTTOM: 'KeyS' // down arrow
+controls.keys = {
+	LEFT: 'ArrowLeft', //left arrow
+	UP: 'ArrowUp', // up arrow
+	RIGHT: 'ArrowRight', // right arrow
+	BOTTOM: 'ArrowDown' // down arrow
 }
 }
 
@@ -150,7 +148,7 @@ function animate() {
     if (object && objToRender === "kroete") {
     //I've played with the constants here until it looked good
     
-  object.rotation.y += 0.001;
+  scene.rotation.y += 0.001;
   }
   stats.update();
   renderer.render(scene, camera);

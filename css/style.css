@@ -10,8 +10,8 @@ body {
 
 logo {
   position: absolute;
-  top: 20px;
-  left: 20px;
+  top: 10px;
+  left: 80px;
   width: 3%;
   height: 3%;
   display: flex;
